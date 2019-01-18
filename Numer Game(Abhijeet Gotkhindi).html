@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	 
+	  <title>Abhijeet's Random Number Game</title>
+		  
+	</head>
+<body>
+	<div>
+	  <div id="div">
+    <span id="randomnumbers"></span>
+    <p>
+        <a id ="number1"></a>   
+         <a id ="number2"></a>
+         <a id ="number3"></a>
+	</p>
+	
+    <p id="text"></p>
+	  <p id="moneyLeft"></p>
+	</div> <br>
+
+		<button id="message" onclick="get_Random_Integer(0,10)">Start</button>
+	<script>
+		var INR= 1000;
+        document.getElementById("moneyLeft").innerHTML =  "You have " + (INR) + " INR"
+         
+		function get_Random_Integer(min, max) {
+            document.getElementById("randomnumbers").innerHTML = "The Random Numbers are:"
+                
+				var num1 = Math.floor(Math.random() * (max - min)) + min;
+				var num2 = Math.floor(Math.random() * (max - min)) + min;
+				var num3 = Math.floor(Math.random() * (max - min)) + min;
+               
+				
+				document.getElementById('number1').innerHTML = num1;
+				document.getElementById('number2').innerHTML = num2;
+				document.getElementById('number3').innerHTML = num3;
+						
+		  if((((num1%2)==0) && ((num2%2)==0) && ((num3%2)==0))&& ((num1!=num2) || (num1!=num3))){
+				INR+=200;
+				document.getElementById("text").innerHTML = "You have won 300 INR as all the numbers are even";
+                document.getElementById("moneyLeft").innerHTML = "You have " + (INR) + " INR";
+			}
+            else if((((Math.abs(num1-num2)==1)&&(Math.abs(num2-num3)==1))||((Math.abs(num1-num3)==1)&&(Math.abs(num2-num3)==1))||((Math.abs(num1-num2)==1)&&(Math.abs(num1-num3)==1))) && ((num1!=num2) && (num1!=num3) && (num2!=num3)))
+			{
+				INR+=700;
+				document.getElementById("text").innerHTML = "You have won 800 INR as the numbers are in sequence";
+                document.getElementById("moneyLeft").innerHTML = "You have " + (INR) + " INR";
+			}
+			
+			else if((num1==num2)&& (num1==num3)){
+				INR+=900;
+				document.getElementById("text").innerHTML = "You have won 1000 INR as all the numbers are same";
+                document.getElementById("moneyLeft").innerHTML = "You have " + (INR) + " INR";
+			}
+
+            else if((((num1%2)!=0) && ((num2%2)!=0) && ((num3%2)!=0))&& ((num1!=num2) || (num1!=num3))){
+				INR+=200;
+				document.getElementById("text").innerHTML = "You have won 300 INR as all the numbers are odd";
+                document.getElementById("moneyLeft").innerHTML = "You have " + (INR) + " INR";
+			}
+			
+			else if(INR<=100){
+			    document.getElementById("moneyLeft").innerHTML = "Game Over";
+				document.getElementById('message').disabled=true;
+            }
+
+			else {
+				INR-=100;
+				document.getElementById("text").innerHTML = "You were not lucky this time";
+                document.getElementById("moneyLeft").innerHTML = "You have " + (INR) + " INR";
+			}
+		}
+	</script>
+	</div>
+</body>
+</html>
